@@ -19,33 +19,33 @@ Solution: `SELECT * FROM sakila.actor WHERE last_name LIKE "%GEN%";`
 Solution: `SELECT last_name, first_name FROM sakila.actor WHERE last_name LIKE "%LI%";`
 
 * 2d. Using `IN`, display the `country_id` and `country` columns of the following countries: Afghanistan, Bangladesh, and China:
-Solution: SELECT country_id, country FROM sakila.country
-WHERE country IN ('Afghanistan', 'Bangladesh', 'China');
+Solution: `SELECT country_id, country FROM sakila.country
+WHERE country IN ('Afghanistan', 'Bangladesh', 'China');`
 
 * 3a. Add a `middle_name` column to the table `actor`. Position it between `first_name` and `last_name`. Hint: you will need to specify the data type.
-Solution: ALTER table sakila.actor Add column middle_name CHAR(20) AFTER first_name;
+Solution: `ALTER table sakila.actor Add column middle_name CHAR(20) AFTER first_name;`
   	
 * 3b. You realize that some of these actors have tremendously long last names. Change the data type of the `middle_name` column to `blobs`. 
-Solution: ALTER TABLE sakila.actor MODIFY COLUMN middle_name blob # there is nothing as blobs.
+Solution: `ALTER TABLE sakila.actor MODIFY COLUMN middle_name blob # there is nothing as blobs.`
 
 * 3c. Now delete the `middle_name` column.
-Solution: ALTER table actor DROP middle_name;
+Solution: `ALTER table actor DROP middle_name;`
 
 * 4a. List the last names of actors, as well as how many actors have that last name.
-Solution: SELECT last_name, COUNT(last_name)  FROM sakila.actor GROUP BY last_name;
+Solution: `SELECT last_name, COUNT(last_name)  FROM sakila.actor GROUP BY last_name;`
   	
 * 4b. List last names of actors and the number of actors who have that last name, but only for names that are shared by at least two actors
-Solution: SELECT last_name, COUNT(last_name)  FROM sakila.actor GROUP BY last_name HAVING COUNT(last_name) > 1;
+Solution: `SELECT last_name, COUNT(last_name)  FROM sakila.actor GROUP BY last_name HAVING COUNT(last_name) > 1;`
 
 
 * 4c. Oh, no! The actor `HARPO WILLIAMS` was accidentally entered in the `actor` table as `GROUCHO WILLIAMS`, the name of Harpo's second cousin's husband's yoga teacher. Write a query to fix the record.
 
-Solution: Update sakila.actor SET first_name = 'HARPO' WHERE last_name LIKE "WILLIAMS" AND first_name like "GROUCHO";
+Solution: `Update sakila.actor SET first_name = 'HARPO' WHERE last_name LIKE "WILLIAMS" AND first_name like "GROUCHO";`
   	
 * ###4d. Perhaps we were too hasty in changing `GROUCHO` to `HARPO`. It turns out that `GROUCHO` was the correct name after all! In a single query, if the first name of the actor is currently `HARPO`, change it to `GROUCHO`. Otherwise, change the first name to `MUCHO GROUCHO`, as that is exactly what the actor will be with the grievous error. BE CAREFUL NOT TO CHANGE THE FIRST NAME OF EVERY ACTOR TO `MUCHO GROUCHO`, HOWEVER! (Hint: update the record using a unique identifier.) # VERY CONFUSING
 
 * 5a. You cannot locate the schema of the `address` table. Which query would you use to re-create it?
-Solution: desc sakila.address;
+Solution: `desc sakila.address;`
 
 * 6a. Use `JOIN` to display the first and last names, as well as the address, of each staff member. Use the tables `staff` and `address`:
 
