@@ -1,8 +1,8 @@
 ## SQL Practice Using the sakila database ( comes with mysql installation)
 
 * 1a. You need a list of all the actors who have Display the first and last names of all actors from the table `actor`.
-Solution: SELECT DISTINCT first_name, last_name
-FROM sakila.actor;
+Solution: `SELECT DISTINCT first_name, last_name
+FROM sakila.actor;`
 
 * 1b. Display the first and last name of each actor in a single column in upper case letters. Name the column `Actor Name`. 
 
