@@ -106,47 +106,47 @@ WHERE film_id = (SELECT f.film_id FROM sakila.film f WHERE title = "ALONE TRIP")
    
 * 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information.
 
-SOLUTION: SELECT c.first_name, c.last_name, c.email
+SOLUTION: `SELECT c.first_name, c.last_name, c.email
 FROM customer c
 INNER JOIN address a ON a.address_id = c.address_id
 INNER JOIN city    ci ON ci.city_id   = a.city_id
 INNER JOIN country co ON co.country_id   = ci.country_id
-WHERE co.country_id = (SELECT country_id from country where country = "Canada" );
+WHERE co.country_id = (SELECT country_id from country where country = "Canada" );`
 
 * 7d. Sales have been lagging among young families, and you wish to target all family movies for a promotion. Identify all movies categorized as family films.
 
-Solution: SELECT title as Family_Movie_Names FROM sakila.film
+Solution: `SELECT title as Family_Movie_Names FROM sakila.film
 WHERE film_id IN (SELECT film_id FROM sakila.film_category 
-WHERE category_id = (SELECT category_id FROM sakila.category WHERE name = "Family"));
+WHERE category_id = (SELECT category_id FROM sakila.category WHERE name = "Family"));`
 
 * 7e. Display the most frequently rented movies in descending order.
 Solution:
-SELECT count(r.inventory_id) AS Number_of_times_Rented, f.title
+`SELECT count(r.inventory_id) AS Number_of_times_Rented, f.title
 FROM sakila.film f
 INNER JOIN sakila.inventory i
 ON i.film_id = f.film_id
 INNER JOIN sakila.rental r
 ON r.inventory_id = i.inventory_id
 GROUP BY f.title
-ORDER BY COUNT(r.inventory_id) DESC;
+ORDER BY COUNT(r.inventory_id) DESC;`
 
 
   	
 * 7f. Write a query to display how much business, in dollars, each store brought in.
 Solution:
-SELECT s.store_id, SUM(p.amount) AS Total_Amount
+`SELECT s.store_id, SUM(p.amount) AS Total_Amount
 FROM sakila.payment p
 INNER JOIN sakila.staff st
 ON st.staff_id = p.staff_id
 INNER JOIN sakila.store s
 ON st.store_id = s.store_id
-GROUP BY s.store_id;
+GROUP BY s.store_id;`
 
 
 * 7g. Write a query to display for each store its store ID, city, and country.
 
 solution:
-SELECT s.store_id, c.city, co.country
+`SELECT s.store_id, c.city, co.country
 FROM sakila.store s
 INNER JOIN sakila.address a
 ON s.address_id = a.address_id
@@ -154,7 +154,7 @@ INNER JOIN sakila.city c
 ON c.city_id = a.city_id
 INNER JOIN sakila.country co
 ON co.country_id = c.country_id
-GROUP BY s.store_id;
+GROUP BY s.store_id;`
 
   	
 * 7h. List the top five genres in gross revenue in descending order. (**Hint**: you may need to use the following tables: category, film_category, inventory, payment, and rental.)
