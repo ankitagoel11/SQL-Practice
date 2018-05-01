@@ -96,17 +96,23 @@ ORDER BY c.last_name;`
 
 * 7a. The music of Queen and Kris Kristofferson have seen an unlikely resurgence. As an unintended consequence, films starting with the letters `K` and `Q` have also soared in popularity. Use subqueries to display the titles of movies starting with the letters `K` and `Q` whose language is English. 
 
-
+Solution:
+`SELECT title
+from sakila.film 
+where title like "K%" OR title LIKE "Q%" 
+AND language_id = (SELECT language_id from sakila.language where name = "English");`
 
 * 7b. Use subqueries to display all actors who appear in the film `Alone Trip`.
 
-Solution: `SELECT a.first_name, a.last_name FROM actor a
+Solution:
+`SELECT a.first_name, a.last_name FROM actor a
 WHERE actor_id IN (SELECT actor_id FROM film_actor 
 WHERE film_id = (SELECT f.film_id FROM sakila.film f WHERE title = "ALONE TRIP"));`
    
 * 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information.
 
-SOLUTION: `SELECT c.first_name, c.last_name, c.email
+SOLUTION:
+`SELECT c.first_name, c.last_name, c.email
 FROM customer c
 INNER JOIN address a ON a.address_id = c.address_id
 INNER JOIN city    ci ON ci.city_id   = a.city_id
@@ -145,7 +151,7 @@ GROUP BY s.store_id;`
 
 * 7g. Write a query to display for each store its store ID, city, and country.
 
-solution:
+Solution:
 `SELECT s.store_id, c.city, co.country
 FROM sakila.store s
 INNER JOIN sakila.address a
@@ -177,10 +183,33 @@ ORDER BY Gross_Amount
 LIMIT 5;`
   	
 * 8a. In your new role as an executive, you would like to have an easy way of viewing the Top five genres by gross revenue. Use the solution from the problem above to create a view. If you haven't solved 7h, you can substitute another query to create a view.
+
+Solution:
+`CREATE VIEW Top_Five_Genres AS
+SELECT
+   c.name AS 'Genres', SUM(p.amount) AS 'Gross_Amount'
+FROM
+   sakila.category c
+       JOIN
+   sakila.film_category fc ON (c.category_id = fc.category_id)
+       JOIN
+   sakila.inventory i ON (fc.film_id = i.film_id)
+       JOIN
+   sakila.rental r ON (i.inventory_id = r.inventory_id)
+       JOIN
+   sakila.payment p ON (r.rental_id = p.rental_id)
+GROUP BY c.name
+ORDER BY Gross_Amount
+LIMIT 5;`
+
   	
 * 8b. How would you display the view that you created in 8a?
+Solution:
+`SELECT * FROM Top_Five_Genres;`
 
 * 8c. You find that you no longer need the view `top_five_genres`. Write a query to delete it.
+Solution:
+`DROP VIEW Top_Five_Genres;`
 
 ### Appendix: List of Tables in the Sakila DB
 
