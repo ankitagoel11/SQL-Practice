@@ -100,9 +100,9 @@ ORDER BY c.last_name;`
 
 * 7b. Use subqueries to display all actors who appear in the film `Alone Trip`.
 
-Solution: SELECT a.first_name, a.last_name FROM actor a
+Solution: `SELECT a.first_name, a.last_name FROM actor a
 WHERE actor_id IN (SELECT actor_id FROM film_actor 
-WHERE film_id = (SELECT f.film_id FROM sakila.film f WHERE title = "ALONE TRIP"));
+WHERE film_id = (SELECT f.film_id FROM sakila.film f WHERE title = "ALONE TRIP"));`
    
 * 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information.
 
