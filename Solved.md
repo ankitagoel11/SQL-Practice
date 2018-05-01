@@ -208,8 +208,7 @@ Solution:
 `SELECT * FROM Top_Five_Genres;`
 
 * 8c. You find that you no longer need the view `top_five_genres`. Write a query to delete it.
-Solution:
-`DROP VIEW Top_Five_Genres;`
+Solution: `DROP VIEW Top_Five_Genres;`
 
 ### Appendix: List of Tables in the Sakila DB
 
