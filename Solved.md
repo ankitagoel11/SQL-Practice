@@ -49,46 +49,44 @@ Solution: `desc sakila.address;`
 
 * 6a. Use `JOIN` to display the first and last names, as well as the address, of each staff member. Use the tables `staff` and `address`:
 
-Solution: SELECT s.first_name, s.last_name, a.address 
+Solution: `SELECT s.first_name, s.last_name, a.address 
 FROM sakila.staff s
 INNER JOIN sakila.address a
-ON a.address_id = s.address_id;
+ON a.address_id = s.address_id;`
 
 * 6b. Use `JOIN` to display the total amount rung up by each staff member in August of 2005. Use tables `staff` and `payment`. 
 
-Solution: SELECT SUM(p.amount) AS Amount_in_August_2005, p.staff_id 
+Solution: `SELECT SUM(p.amount) AS Amount_in_August_2005, p.staff_id 
 FROM sakila.payment p
 INNER JOIN sakila.staff s
 ON p.staff_id = s.staff_id
 where p.payment_date LIKE "2005-08%" 
-GROUP BY staff_id;
+GROUP BY staff_id;`
 
   	
 * 6c. List each film and the number of actors who are listed for that film. Use tables `film_actor` and `film`. Use inner join.
 
-Solution: SELECT f.title, count(fa.actor_id) AS Number_of_actors
+Solution: `SELECT f.title, count(fa.actor_id) AS Number_of_actors
 FROM sakila.film f
 INNER JOIN sakila.film_actor fa
 ON f.film_id = fa.film_id
-GROUP BY f.title;
-
+GROUP BY f.title;`
 
 
 * 6d. How many copies of the film `Hunchback Impossible` exist in the inventory system?
 
-Solution: SELECT COUNT(inventory_id) AS Count_of_Hunchback_Impossible FROM sakila.inventory 
-WHERE film_id = (SELECT film_id FROM sakila.film WHERE title LIKE "HUNCHBACK IMPOSSIBLE");
-
+Solution: `SELECT COUNT(inventory_id) AS Count_of_Hunchback_Impossible FROM sakila.inventory 
+WHERE film_id = (SELECT film_id FROM sakila.film WHERE title LIKE "HUNCHBACK IMPOSSIBLE");`
 
 
 * 6e. Using the tables `payment` and `customer` and the `JOIN` command, list the total paid by each customer. List the customers alphabetically by last name:
 SOLUTION: 
-SELECT c.first_name, c.last_name, SUM(p.amount) AS Total_Amount_Paid
+`SELECT c.first_name, c.last_name, SUM(p.amount) AS Total_Amount_Paid
 FROM sakila.payment p
 INNER JOIN sakila.customer c
 ON c.customer_id = p.customer_id
 GROUP BY c.last_name
-ORDER BY c.last_name;
+ORDER BY c.last_name;`
 
 
 
